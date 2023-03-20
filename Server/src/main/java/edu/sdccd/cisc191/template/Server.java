@@ -20,6 +20,8 @@ public class Server {
     private BufferedReader in;
 
     public void start(int port) throws Exception {
+
+
         serverSocket = new ServerSocket(port);
         clientSocket = serverSocket.accept();
         out = new PrintWriter(clientSocket.getOutputStream(), true);
