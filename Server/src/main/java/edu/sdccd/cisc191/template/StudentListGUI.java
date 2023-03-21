@@ -108,11 +108,33 @@ public class StudentListGUI extends Application {
                 TextField field = (TextField) inputPane.getChildren().get(i * 2 + 1);
                 student[i] = field.getText();
             }
-            if (student[3].equals("none")) {
-                studentData.add(new normalStudent(student[0], student[1], student[2], Double.parseDouble(student[4])));
-            } else {
-                studentData.add(new athleteStudent(student[0], student[1], student[2], student[3], Double.parseDouble(student[4])));
+            boolean noNumberInName = true;
+            for (int i = 0; i < student[1].length(); i++) {
+                if (Character.isDigit(student[1].charAt(i))) {
+                    noNumberInName = false;
+                }
             }
+            for (int i = 0; i < student[2].length(); i++) {
+                if (Character.isDigit(student[2].charAt(i))) {
+                    noNumberInName = false;
+                }
+            }
+            for (int i = 0; i < student[3].length(); i++) {
+                if (Character.isDigit(student[3].charAt(i))) {
+                    noNumberInName = false;
+                }
+            }
+            if(noNumberInName){
+                if (student[3].equals("none")) {
+                    studentData.add(new normalStudent(student[0], student[1], student[2], Double.parseDouble(student[4])));
+                } else {
+                    studentData.add(new athleteStudent(student[0], student[1], student[2], student[3], Double.parseDouble(student[4])));
+                }
+            }
+            else{
+                System.out.println("Could not add entry. Name or sport cannot include a number");
+            }
+
             numStudents++;
             clearFields();
         } else {
